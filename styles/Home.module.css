@@ -9,6 +9,7 @@
 }
 
 .main {
+	background: url(../public/images/Feast.png);
   padding: 5rem 0;
   flex: 1;
   display: flex;
