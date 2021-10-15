@@ -1,9 +1,8 @@
 import type { NextPage } from 'next'
 import Link from 'next/link'
 import Head from 'next/head'
-import Image from 'next/image'
-import logoText from '../public/images/BESTlogoText.png'
 import styles from '../styles/Home.module.css'
+import GoogleLogo from '../public/images/GoogleLogo'
 
 const Home: NextPage = () => {
   return (
@@ -14,19 +13,27 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-			
       <main className={styles.mainBG}>
-				<Image src={logoText} alt="BEST" />
+        <p className={styles.logoLetters}>
+          BE
+          <br />
+          ST
+        </p>
         <h1>
-					Only your Friends.<br/>
-					Only their favorite places.
+          Only your Friends.
+          <br />
+          Only their favorite places.
         </h1>
 
-        <h2>
-					ask a <Link href="/Question"><a>Question</a></Link>
-        </h2>
+        <Link href="/Question">
+          <a>
+            <button className={styles.googleButton}>
+              <GoogleLogo />
+              <p style={{ marginLeft: '15px' }}>Sign In with Google</p>
+            </button>
+          </a>
+        </Link>
       </main>
-
     </div>
   )
 }

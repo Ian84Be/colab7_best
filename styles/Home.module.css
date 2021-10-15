@@ -1,74 +1,53 @@
 .container {
-	align-items: center;
-	background: var(--primary_bg);
-	/* border: 3px solid black; */
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	/* padding: 1rem; */
+  align-items: center;
+  background: var(--primary_bg);
+  /* border: 3px solid black; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* padding: 1rem; */
 }
 
 .mainBG {
-	align-items: center;
-	background-image: url(../public/images/Feast.png);
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	padding: 20px 20px 16px 20px;
-	width: 375px;
-	height: 667px;
+  align-items: center;
+  background-image: url(../public/images/Feast.png);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px 20px 16px 20px;
+  width: 375px;
+  height: 667px;
 }
 
-.content {
-	align-items: center;
-	border: 5px solid greenyellow;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	padding: 20px 20px 16px 20px;
-	width: 375px;
-	height: 667px;
+.googleButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 345px;
+  height: 54px;
+
+  background: #fafafa;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.084), 0px 2px 3px rgba(0, 0, 0, 0.168);
+  border-radius: 10px;
+  border: none;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 23px;
+
+  color: rgba(0, 0, 0, 0.54);
 }
 
-.form {
-	align-items: center;
-	border: 1px solid black;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	padding:20px;
-}
+.logoLetters {
+  font-family: Moki;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 100px;
+  line-height: 91px;
+  letter-spacing: -0.06em;
 
-.label {
-	font-size: 16px;
-	line-height: 14.4px;
-}
-
-.footer {
-	display: flex;
-	justify-content: space-around;
-	width: 375px;
-}
-
-.footer_button {
-	display: flex;
-	background: var(--button);
-	border-radius: 20px;
-	font-size: 14px;
-	/* width: 148px; */
-	height: 40px;
-	padding: 10px;
-}
-
-.submit_button {
-	border: 1px solid white;
-	color: white;
-	display: flex;
-	justify-content: center;
-	background: var(--button-hover);
-	border-radius: 20px;
-	font-size: 14px;
-	width: 148px;
-	height: 40px;
-	padding: 10px;
+  color: var(--primary);
+  margin: 62px 0 40px 0;
 }

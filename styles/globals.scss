@@ -1,13 +1,21 @@
+@font-face {
+  font-family: 'Moki';
+  src: url('../public/fonts/FaceType-Moki-Mono.otf');
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 :root {
-	--primary: #EA3858;
-	--primary-hover: #ffffff;
-	--primary_bg: #EFF3F3;
-	--button: #073336;
-	--button-hover: var(--primary);
+  --primary: #ea3858;
+  --primary-hover: #ffffff;
+  --primary_bg: #eff3f3;
+  --button: #073336;
+  --button-hover: var(--primary);
 }
 
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html,
@@ -21,20 +29,22 @@ body {
 a {
   color: var(--primary);
   text-decoration: none;
-	&:hover {
-		color: var(--primary-hover);
-	}
+  &:hover {
+    color: var(--primary-hover);
+  }
 }
 
 button:hover {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 h1 {
-	display: flex;
-	justify-content: center;
-	font-size: 22px;
-	line-height: 31px;
-	text-align: center;
-	margin-top: 40px;
+  font-family: objektiv-mk1, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 32px;
+  text-align: center;
+  color: #05343a;
+  margin: 0 0 91px 0;
 }
