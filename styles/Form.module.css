@@ -1,0 +1,102 @@
+.content {
+  align-items: center;
+  border: 3px solid white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px 20px 16px 20px;
+  width: 375px;
+  height: 667px;
+}
+
+.form {
+  align-items: center;
+  /* border: 1px solid black; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+  width: 100%;
+
+  font-family: Objektiv Mk1;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 23px;
+
+  color: #05343a;
+}
+
+.label {
+  display: flex;
+  font-family: Objektiv Mk1, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 23px;
+  margin: 8px 0 8px;
+}
+
+.logoFont {
+  font-family: Moki;
+  color: var(--primary);
+  margin-right: 4px;
+}
+
+.input {
+  width: 335px;
+  height: 36px;
+
+  background: #f8f8f8;
+  border: 1px solid #05343a;
+  box-sizing: border-box;
+  border-radius: 3px;
+
+  font-family: Objektiv Mk1, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 23px;
+  padding-left: 16px;
+}
+
+.submit_button {
+  border: 1px solid white;
+  color: white;
+  display: flex;
+  justify-content: center;
+  background: var(--button-hover);
+  border-radius: 20px;
+  font-size: 14px;
+  width: 148px;
+  height: 40px;
+  padding: 10px;
+  font-family: Objektiv Mk1, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 23px;
+  margin-top: 80px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-around;
+  width: 375px;
+}
+
+.footer_button {
+  display: flex;
+  background: var(--button);
+  border-radius: 20px;
+  font-size: 14px;
+  /* width: 148px; */
+  height: 40px;
+  padding: 10px;
+  font-family: Objektiv Mk1, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 23px;
+  color: white;
+}
