@@ -7,15 +7,28 @@ import styles from '../styles/Form.module.css'
 import homeIcon from '../public/images/home_button.svg'
 
 const Question: NextPage = () => {
+  const thisAPI = 'http://localhost:3000/api/hello'
   const formState = {
     food: '',
     occasion: '',
     location: '',
   }
 
-  const submitData = async (): Promise<boolean> => {
+  const submitData = async (): Promise<any> => {
     console.log({ formData })
-    return true
+    try {
+      const response = await fetch(thisAPI, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
+      const res = await response.json()
+      console.log(res)
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const { formData, handleChange, handleSubmit } = useForm(
