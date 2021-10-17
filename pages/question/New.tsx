@@ -1,13 +1,13 @@
-import React, { ReactFragment, useState } from 'react'
+import React from 'react'
 import { NextPage } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useForm } from '../hooks/useForm'
-import styles from '../styles/Form.module.css'
-import homeIcon from '../public/images/home_button.svg'
+import { useForm } from '../../hooks/useForm'
+import styles from '../../styles/Form.module.css'
+import homeIcon from '../../public/images/home_button.svg'
 
-const Question: NextPage = () => {
-  const thisAPI = 'http://localhost:3000/api/hello'
+const NewQuestion: NextPage = () => {
+  const thisAPI = 'http://localhost:3000/api/createQuestion'
   const formState = {
     food: '',
     occasion: '',
@@ -16,19 +16,18 @@ const Question: NextPage = () => {
 
   const submitData = async (): Promise<any> => {
     console.log({ formData })
-    try {
-      const response = await fetch(thisAPI, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
-      const res = await response.json()
-      console.log(res)
-    } catch (error) {
-      console.log(error)
-    }
+
+    const response = await fetch(thisAPI, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    })
+      .then((res) => res.json())
+      .catch((err) => console.log({ err }))
+
+    console.log('submitData() response', response)
   }
 
   const { formData, handleChange, handleSubmit } = useForm(
@@ -97,4 +96,4 @@ const Question: NextPage = () => {
     </div>
   )
 }
-export default Question
+export default NewQuestion

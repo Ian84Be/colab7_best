@@ -3,8 +3,10 @@ import Link from 'next/link'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import GoogleLogo from '../public/images/GoogleLogo'
+import { signIn, signOut, useSession } from 'next-auth/client'
 
 const Home: NextPage = () => {
+  const [session, loading] = useSession()
   return (
     <div className={styles.container}>
       <Head>
@@ -25,13 +27,19 @@ const Home: NextPage = () => {
           Only their favorite places.
         </h1>
 
-        <Link href="/Question">
-          <a>
-            <button className={styles.googleButton}>
-              <GoogleLogo />
-              <p style={{ marginLeft: '15px' }}>Sign In with Google</p>
-            </button>
-          </a>
+        <button
+          className={styles.googleButton}
+          onClick={() =>
+            signIn('google', {
+              callbackUrl: 'http://localhost:3000/question/new',
+            })
+          }
+        >
+          <GoogleLogo />
+          <p style={{ marginLeft: '15px' }}>Sign In with Google</p>
+        </button>
+        <Link href="/question/New">
+          <a>New Question</a>
         </Link>
       </main>
     </div>
