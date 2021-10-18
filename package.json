@@ -8,6 +8,9 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "prisma": {
+    "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed"
+  },
   "dependencies": {
     "@next-auth/prisma-adapter": "^0.5.4",
     "@prisma/client": "^3.2.1",
@@ -15,7 +18,8 @@
     "next-auth": "^3.29.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "sass": "^1.43.2"
+    "sass": "^1.43.2",
+    "swr": "^1.0.1"
   },
   "devDependencies": {
     "@types/react": "17.0.29",

@@ -1,5 +1,5 @@
 import React from 'react'
-import { NextPage } from 'next'
+import { NextPage, GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useForm } from '../../hooks/useForm'
@@ -7,7 +7,7 @@ import styles from '../../styles/Form.module.css'
 import homeIcon from '../../public/images/home_button.svg'
 
 const NewQuestion: NextPage = () => {
-  const thisAPI = 'http://localhost:3000/api/createQuestion'
+  const localApi = 'http://localhost:3000/api/'
   const formState = {
     food: '',
     occasion: '',
@@ -17,7 +17,7 @@ const NewQuestion: NextPage = () => {
   const submitData = async (): Promise<any> => {
     console.log({ formData })
 
-    const response = await fetch(thisAPI, {
+    const response = await fetch(localApi + 'createQuestion', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -42,6 +42,12 @@ model Occasion {
   Question  Question[]
 }
 
+model Food {
+  id        Int      @id @default(autoincrement())
+  name      String
+  createdAt DateTime @default(now()) @map("created_at")
+}
+
 model User {
   id            Int        @id @default(autoincrement())
   name          String?
