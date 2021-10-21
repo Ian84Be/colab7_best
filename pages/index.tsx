@@ -9,12 +9,6 @@ const Home: NextPage = () => {
   const [session, loading] = useSession()
   return (
     <div className={styles.container}>
-      <Head>
-        <title>BEST</title>
-        <meta name="description" content="colab7_best" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <main className={styles.mainBG}>
         <p className={styles.logoLetters}>
           BE
@@ -31,17 +25,23 @@ const Home: NextPage = () => {
           className={styles.googleButton}
           onClick={() =>
             signIn('google', {
-              callbackUrl: 'http://localhost:3000/question/new',
+              callbackUrl: 'http://localhost:3000/question/New',
             })
           }
         >
           <GoogleLogo />
           <p style={{ marginLeft: '15px' }}>Sign In with Google</p>
         </button>
-        <Link href="/question/New">
-          <a>New Question</a>
-        </Link>
       </main>
+
+      {loading && <p>loading...</p>}
+      {!session && <div>need tolog in</div>}
+      {session && (
+        <>
+          <p>signed in as {session.user?.name}</p>
+          <button onClick={() => signOut()}>sign out</button>
+        </>
+      )}
     </div>
   )
 }

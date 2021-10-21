@@ -23,6 +23,8 @@ model Question {
   createdAt  DateTime  @default(now()) @map("created_at")
   expires    DateTime?
   Answer     Answer[]
+
+  @@map("questions")
 }
 
 model Answer {
@@ -33,6 +35,8 @@ model Answer {
   questionId Int
   question   Question @relation(fields: [questionId], references: [id])
   createdAt  DateTime @default(now()) @map("created_at")
+
+  @@map("answers")
 }
 
 model Occasion {
@@ -40,38 +44,47 @@ model Occasion {
   name      String
   createdAt DateTime   @default(now()) @map("created_at")
   Question  Question[]
+
+  @@map("occasions")
 }
 
 model Food {
   id        Int      @id @default(autoincrement())
   name      String
   createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("foods")
 }
 
 model User {
   id            Int        @id @default(autoincrement())
   name          String?
   email         String?    @unique
-  emailVerified DateTime?  @map("email_verified")
+  emailVerified Boolean?   @default(false) @map("verified_email")
   image         String?
   createdAt     DateTime   @default(now()) @map("created_at")
   updatedAt     DateTime   @updatedAt @map("updated_at")
   questions     Question[]
-  account       Account[]
+  accounts      Account[]
+  sessions      Session[]
 
   @@map("users")
 }
 
 model Account {
   id                 Int      @id @default(autoincrement())
-  compoundId         String?  @map("compound_id")
   userId             Int?     @map("user_id")
+  compoundId         String?  @map("compound_id")
   providerType       String   @map("provider_type")
   providerId         String   @map("provider_id")
   providerAccountId  String   @map("provider_account_id")
   refreshToken       String?  @map("refresh_token")
   accessToken        String?  @map("access_token")
   accessTokenExpires String?  @map("access_token_expires")
+  idToken            String?  @map("id_token")
+  expires_in         Int?
+  scope              String?
+  token_type         String?
   createdAt          DateTime @default(now()) @map("created_at")
   updatedAt          DateTime @default(now()) @map("updated_at")
   user               User?    @relation(fields: [userId], references: [id])
@@ -91,6 +104,15 @@ model Session {
   accessToken  String   @unique @map("access_token")
   createdAt    DateTime @default(now()) @map("created_at")
   updatedAt    DateTime @default(now()) @map("updated_at")
+  user         User     @relation(fields: [userId], references: [id])
 
   @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
 }

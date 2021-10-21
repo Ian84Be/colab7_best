@@ -1,17 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { NextPage, GetStaticProps } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useForm } from '../../hooks/useForm'
 import styles from '../../styles/Form.module.css'
 import homeIcon from '../../public/images/home_button.svg'
+import FormStep1 from '../../components/FormStep1'
+import FormStep2 from '../../components/FormStep2'
+
+export type FormData = {
+  food: string
+  occasion: string
+  location: string
+  contacts: string
+}
 
 const NewQuestion: NextPage = () => {
   const localApi = 'http://localhost:3000/api/'
+  const [formStep, setFormStep] = useState(1)
   const formState = {
     food: '',
     occasion: '',
     location: '',
+    contacts: {},
   }
 
   const submitData = async (): Promise<any> => {
@@ -38,45 +49,13 @@ const NewQuestion: NextPage = () => {
   return (
     <div className={styles.content}>
       <form onSubmit={handleSubmit} className={styles.form}>
-        <label htmlFor="food" className={styles.label}>
-          <div className={styles.logoFont}>BEST</div> place for
-        </label>
-        <input
-          autoComplete="food"
-          className={styles.input}
-          id="food"
-          name="food"
-          type="text"
-          onChange={handleChange}
-          placeholder="food"
-          required
-        />
-        <label htmlFor="occasion" className={styles.label}>
-          OR
-        </label>
-        <input
-          autoComplete="occasion"
-          className={styles.input}
-          id="occasion"
-          name="occasion"
-          type="text"
-          onChange={handleChange}
-          placeholder="occasion"
-          required
-        />
-        <label htmlFor="location" className={styles.label}>
-          IN
-        </label>
-        <input
-          autoComplete="location"
-          className={styles.input}
-          id="location"
-          name="location"
-          type="text"
-          onChange={handleChange}
-          placeholder="location"
-          required
-        />
+        {formStep === 1 && (
+          <FormStep1 formData={formData} handleChange={handleChange} />
+        )}
+        {formStep === 2 && (
+          <FormStep2 formData={formData} handleChange={handleChange} />
+        )}
+
         <button type="submit" className={styles.submit_button}>
           Next
         </button>
