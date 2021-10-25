@@ -12,7 +12,14 @@ const Home: NextPage = () => {
     <div className={styles.container}>
       <main className={styles.mainBG}>
         <BestLogo />
-        <h1 style={{ fontFamily: 'Mulish, sans-serif' }}>
+        <h1
+          style={{
+            fontFamily: 'Mulish, sans-serif',
+            fontSize: '22px',
+            lineHeight: '32px',
+            marginBottom: '91px',
+          }}
+        >
           Only your Friends.
           <br />
           Only their favorite places.

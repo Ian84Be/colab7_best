@@ -1,21 +1,12 @@
 import React from 'react'
-import styles from '../styles/Form.module.css'
-import { FormData } from '../pages/question/New'
+import styles from '../../styles/Form.module.css'
 import { Dropdown, Input } from 'semantic-ui-react'
-import { useForm } from '../hooks/useForm'
 
 export type FormProps = {
   formData: FormData
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
 }
-const formState = {
-  food: '',
-  occasion: '',
-  location: '',
-  contacts: {},
-}
-
-const FormStep1: React.FC<Props> = ({
+const Step1: React.FC<Props> = ({
   foodOptions,
   occasionOptions,
   formData,
@@ -24,16 +15,19 @@ const FormStep1: React.FC<Props> = ({
 }) => {
   return (
     <>
-      <p className={styles.prompt}>What are you looking for?</p>
       <label htmlFor="food" className={styles.label}>
-        <div className={styles.logoFont}>BEST</div> place for
+        What are you looking for?
       </label>
+      <div className={styles.label}>
+        <div className={styles.logoFont}>BEST</div> place for
+      </div>
       <Dropdown
         id="food"
         name="food"
         placeholder="food"
         search
         selection
+        style={{ marginBottom: '8px' }}
         options={foodOptions}
         onChange={handleDropdown}
         value={formData.food}
@@ -47,6 +41,7 @@ const FormStep1: React.FC<Props> = ({
         placeholder="occasion"
         search
         selection
+        style={{ marginBottom: '8px' }}
         onChange={handleDropdown}
         options={occasionOptions}
         value={formData.occasion}
@@ -66,4 +61,4 @@ const FormStep1: React.FC<Props> = ({
     </>
   )
 }
-export default FormStep1
+export default Step1

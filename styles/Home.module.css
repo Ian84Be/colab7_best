@@ -17,6 +17,12 @@
   padding: 20px 20px 16px 20px;
   width: 375px;
   height: 667px;
+  /* border: 1px solid red; */
+}
+
+.bestLogo {
+  margin-top: 62px;
+  margin-bottom: 40px;
 }
 
 .googleButton {
@@ -38,16 +44,4 @@
   line-height: 23px;
 
   color: rgba(0, 0, 0, 0.54);
-}
-
-.logoLetters {
-  font-family: Moki;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 100px;
-  line-height: 91px;
-  letter-spacing: -0.06em;
-
-  color: var(--primary);
-  margin: 62px 0 40px 0;
 }

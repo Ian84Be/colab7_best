@@ -1,15 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import styles from '../styles/Form.module.css'
-import { FormData } from '../pages/question/New'
+import React from 'react'
+import styles from '../../styles/Form.module.css'
 import { Dropdown } from 'semantic-ui-react'
-import { useForm } from '../hooks/useForm'
-const localApi = 'http://localhost:3000/api/'
 
-const FormStep2: React.FC<Props> = ({
-  myContacts,
-  formData,
-  handleDropdown,
-}) => {
+const Step2: React.FC<Props> = ({ myContacts, formData, handleDropdown }) => {
   return (
     <>
       <label htmlFor="food" className={styles.prompt}>
@@ -33,4 +26,4 @@ const FormStep2: React.FC<Props> = ({
     </>
   )
 }
-export default FormStep2
+export default Step2
