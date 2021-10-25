@@ -22,8 +22,7 @@ html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: Mulish, sans-serif;
 }
 
 a {
@@ -39,7 +38,7 @@ button:hover {
 }
 
 h1 {
-  font-family: objektiv-mk1, sans-serif;
+  font-family: Mulish, sans-serif;
   font-style: normal;
   font-weight: normal;
   font-size: 22px;
@@ -47,4 +46,17 @@ h1 {
   text-align: center;
   color: #05343a;
   margin: 0 0 91px 0;
+}
+
+.ui.search.selection.dropdown {
+  width: 335px;
+  // height: 36px;
+
+  background: #f8f8f8;
+  border: 1px solid #05343a;
+  box-sizing: border-box;
+  border-radius: 3px;
+
+  font-style: normal;
+  font-weight: normal;
 }

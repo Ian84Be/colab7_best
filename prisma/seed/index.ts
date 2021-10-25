@@ -49,15 +49,15 @@ async function main() {
   await truncateTables()
   await resetSequences()
 
-  // console.log(`seeding ${categories.length} foods...`)
-  // for (const data of categoryData) {
-  //   await prisma.food.create({ data })
-  // }
+  console.log(`seeding ${categories.length} foods...`)
+  for (const data of categoryData) {
+    await prisma.food.create({ data })
+  }
 
-  // console.log(`seeding ${occasions.length} occasions...`)
-  // for (const data of occasionData) {
-  //   await prisma.occasion.create({ data })
-  // }
+  console.log(`seeding ${occasions.length} occasions...`)
+  for (const data of occasionData) {
+    await prisma.occasion.create({ data })
+  }
 }
 
 main()

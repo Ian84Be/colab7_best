@@ -28,7 +28,7 @@ const handler: NextApiHandler = async (
     const { data } = await people.people.connections.list({
       resourceName: 'people/me',
       personFields: 'names,emailAddresses,phoneNumbers',
-      pageSize: '1000',
+      pageSize: 1000,
     })
 
     let result = []

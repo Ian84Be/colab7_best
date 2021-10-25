@@ -2,7 +2,8 @@ import type { NextPage } from 'next'
 import Link from 'next/link'
 import Head from 'next/head'
 import styles from '../styles/Home.module.css'
-import GoogleLogo from '../public/images/GoogleLogo'
+import GoogleLogo from '../components/GoogleLogo'
+import BestLogo from '../components/BestLogo'
 import { signIn, signOut, useSession } from 'next-auth/client'
 
 const Home: NextPage = () => {
@@ -10,12 +11,8 @@ const Home: NextPage = () => {
   return (
     <div className={styles.container}>
       <main className={styles.mainBG}>
-        <p className={styles.logoLetters}>
-          BE
-          <br />
-          ST
-        </p>
-        <h1>
+        <BestLogo />
+        <h1 style={{ fontFamily: 'Mulish, sans-serif' }}>
           Only your Friends.
           <br />
           Only their favorite places.
