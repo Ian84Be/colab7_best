@@ -5,6 +5,7 @@ import styles from '../../styles/Form.module.css'
 import Step1 from './Step1'
 import Step2 from './Step2'
 import Step3 from './Step3'
+import Progress from './Progress'
 
 export type FormData = {
   food: string
@@ -82,6 +83,7 @@ const QuestionForm: React.FC<Props> = (props) => {
 
   return (
     <div className={styles.content}>
+      <Progress formStep={formStep} />
       <Form className={styles.form}>
         {formStep === 1 && (
           <Step1
