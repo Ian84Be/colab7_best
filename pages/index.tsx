@@ -1,6 +1,4 @@
 import type { NextPage } from 'next'
-import Link from 'next/link'
-import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import GoogleLogo from '../components/GoogleLogo'
 import BestLogo from '../components/BestLogo'

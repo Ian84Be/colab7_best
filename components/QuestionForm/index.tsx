@@ -5,6 +5,7 @@ import styles from '../../styles/Form.module.css'
 import Step1 from './Step1'
 import Step2 from './Step2'
 import Step3 from './Step3'
+import Step4 from './Step4'
 import Progress from './Progress'
 
 export type FormData = {
@@ -39,7 +40,7 @@ const QuestionForm: React.FC<Props> = (props) => {
   }, [])
 
   const defaultMessage =
-    'Hi everyone,\n\nI’m asking people whose taste I trust to give me a recommendation using the BEST app.  This question is open for 2 days, and I’d really appreciate your input.\n\nJust click on the BEST button to give me your recommendation!'
+    'Hi everyone,\n\nI’m asking people whose taste I trust to give me a recommendation using the BEST app.  \n\nJust click on the BEST button to give me your recommendation!'
 
   const formState = {
     food: '',
@@ -59,7 +60,10 @@ const QuestionForm: React.FC<Props> = (props) => {
       },
       body: JSON.stringify(formData),
     })
-      .then((res) => res.json())
+      .then((res) => {
+        setFormStep(4)
+        return res.json()
+      })
       .catch((err) => console.log({ err }))
 
     console.log('submitData() response', response)
@@ -77,7 +81,13 @@ const QuestionForm: React.FC<Props> = (props) => {
       if (formStep > 1) setFormStep(formStep - 1)
     }
     if (e.target.innerText === 'Next') {
-      if (formStep < 3) setFormStep(formStep + 1)
+      if (formStep < 4) setFormStep(formStep + 1)
+    }
+    if (e.target.innerText === 'Send') {
+      submitData()
+    }
+    if (e.target.innerText === 'New Question') {
+      setFormStep(1)
     }
   }
 
@@ -104,17 +114,29 @@ const QuestionForm: React.FC<Props> = (props) => {
         {formStep === 3 && (
           <Step3 formData={formData} handleChange={handleChange} />
         )}
+        {formStep === 4 && <Step4 />}
       </Form>
       <div className={styles.formNav}>
-        {formStep > 1 && (
+        {formStep > 1 && formStep !== 4 && (
           <button className={styles.back_button} onClick={handleStepChange}>
             Back
           </button>
         )}
-
-        <button className={styles.next_button} onClick={handleStepChange}>
-          Next
-        </button>
+        {formStep !== 4 && formStep !== 3 && (
+          <button className={styles.next_button} onClick={handleStepChange}>
+            Next
+          </button>
+        )}
+        {formStep === 3 && (
+          <button className={styles.next_button} onClick={handleStepChange}>
+            Send
+          </button>
+        )}
+        {formStep === 4 && (
+          <button className={styles.next_button} onClick={handleStepChange}>
+            New Question
+          </button>
+        )}
       </div>
     </div>
   )

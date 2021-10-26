@@ -9,11 +9,26 @@
   height: 667px;
 }
 
+.accordion_title {
+  border-top: 1px solid #c8d7d7;
+  border-bottom: 1px solid #c8d7d7;
+  width: 100%;
+}
+.titleText {
+  padding: 8px 11px 8px 16px;
+  /* margin: 8px; */
+}
+
+.hidden {
+  display: none;
+}
+
 .progressContainer {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 30px;
 }
 
 .progressButton {
@@ -164,4 +179,17 @@
   font-size: 16px;
   /* line-height: 23px; */
   color: white;
+}
+
+.hilite {
+  font-size: 16px;
+  line-height: 23px;
+  color: var(--primary);
+  font-weight: 700;
+}
+.location {
+  font-size: 16px;
+  line-height: 23px;
+  color: #05343a;
+  font-weight: 700;
 }

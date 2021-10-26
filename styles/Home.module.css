@@ -8,6 +8,17 @@
   /* padding: 1rem; */
 }
 
+.question_content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* padding: 20px 20px 16px 20px; */
+  width: 375px;
+  height: 667px;
+  border: 1px solid red;
+}
+
 .mainBG {
   align-items: center;
   background-image: url(../public/images/Feast.png);

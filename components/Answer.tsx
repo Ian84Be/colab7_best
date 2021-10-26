@@ -19,7 +19,7 @@ export type QuestionProps = {
   location: string
 }
 
-const Question: React.FC<{ question: QuestionProps }> = ({
+const Answer: React.FC<{ question: QuestionProps }> = ({
   activeIndex,
   setActiveIndex,
   question,
@@ -49,4 +49,4 @@ const Question: React.FC<{ question: QuestionProps }> = ({
   )
 }
 
-export default Question
+export default Answer

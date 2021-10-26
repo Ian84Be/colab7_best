@@ -1,18 +1,27 @@
 import type { NextPage, GetStaticProps } from 'next'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import Head from 'next/head'
+import BestLogo from '../../components/BestLogo'
 import styles from '../../styles/Home.module.css'
 import prisma from '../../lib/prisma'
 import { signIn, signOut, useSession } from 'next-auth/client'
 import Router from 'next/router'
 import Question, { QuestionProps } from '../../components/Question'
+import { Accordion } from 'semantic-ui-react'
 
 export const getStaticProps: GetStaticProps = async () => {
   const feed = await prisma.question.findMany({
     select: {
       id: true,
-      food: true,
+      food: {
+        select: { name: true },
+      },
+      occasion: {
+        select: { name: true },
+      },
       location: true,
+      message: true,
       author: {
         select: { name: true },
       },
@@ -28,6 +37,8 @@ type Props = {
 
 const AllQuestions: NextPage<Props> = (props) => {
   const [session, loading] = useSession()
+  const [activeIndex, setActiveIndex] = useState(null)
+
   return (
     <div className={styles.container}>
       <Head>
@@ -36,18 +47,18 @@ const AllQuestions: NextPage<Props> = (props) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.mainBG}>
-        {loading && <p>loading...</p>}
-        {!session && <div>need tolog in</div>}
-        {session && (
-          <>
-            <p>signed in as {session.user?.name}</p>
-            <button onClick={() => signOut()}>sign out</button>
-          </>
-        )}
-        {props.feed.map((question) => (
-          <Question key={question.id} question={question} />
-        ))}
+      <main className={styles.question_content}>
+        <BestLogo size="small" />
+        <Accordion fluid exclusive={false}>
+          {props.feed.map((question) => (
+            <Question
+              key={question.id}
+              activeIndex={activeIndex}
+              setActiveIndex={setActiveIndex}
+              question={question}
+            />
+          ))}
+        </Accordion>
       </main>
     </div>
   )

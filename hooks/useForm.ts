@@ -12,10 +12,15 @@ export const useForm = (callback: any, initialState = {}) => {
     { name, value }
   ) => {
     console.log('handle dropdown', name, value)
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }))
+    setFormData((prevState) => {
+      const newState = { [name]: value }
+      if (name === 'food') newState.occasion = null
+      if (name === 'occasion') newState.food = null
+      return {
+        ...prevState,
+        ...newState,
+      }
+    })
   }
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {

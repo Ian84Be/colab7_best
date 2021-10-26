@@ -8,8 +8,8 @@ import type { User, Session, NextAuthOptions } from 'next-auth'
 const JWT_SECRET = String(process.env.NEXTAUTH_JWT_SECRET)
 const googleScopes = [
   'profile',
+  'email',
   'https://www.googleapis.com/auth/contacts.readonly',
-  'https://www.googleapis.com/auth/user.emails.read',
 ]
 const authUrl = new URL('https://accounts.google.com/o/oauth2/v2/auth')
 authUrl.searchParams.set('prompt', 'consent')
@@ -24,13 +24,13 @@ const options: NextAuthOptions = {
     Providers.Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      authorizationUrl: authUrl.toString(),
+      // authorizationUrl: authUrl.toString(),
       scope: googleScopes.join(' '),
     }),
   ],
   callbacks: {
     signIn: async (user: User, account, profile) => {
-      // console.log('signIn callback!!', { user, account })
+      // console.log('signIn callback!!', { user, account, profile })
       const { provider, id, refresh_token, access_token } = account
       try {
         await prisma.account.update({
@@ -46,18 +46,18 @@ const options: NextAuthOptions = {
         console.log(err)
       }
 
-      const { email, verified_email } = profile
-      if (verified_email) {
-        try {
-          //on first login the user record does not exist yet
-          await prisma.user.update({
-            where: { email },
-            data: { emailVerified: verified_email },
-          })
-        } catch (err) {
-          console.log(err)
-        }
-      }
+      // const { email, verified_email } = profile
+      // if (verified_email) {
+      //   try {
+      //     //on first login the user record does not exist yet
+      //     await prisma.user.update({
+      //       where: { email },
+      //       data: { emailVerified: verified_email },
+      //     })
+      //   } catch (err) {
+      //     console.log(err)
+      //   }
+      // }
       return true
     },
     session: async (session: Session, user: User) => {

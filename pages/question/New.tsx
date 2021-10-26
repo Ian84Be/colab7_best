@@ -1,5 +1,6 @@
 import React from 'react'
 import { NextPage, GetServerSidePropsContext } from 'next'
+import prisma from '../../lib/prisma'
 import Image from 'next/image'
 import Link from 'next/link'
 import styles from '../../styles/Form.module.css'

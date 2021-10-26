@@ -1,9 +1,9 @@
 import styles from '../styles/Home.module.css'
-export default function BestLogo() {
+export default function BestLogo({ size }) {
   return (
     <svg
-      width="171"
-      height="170"
+      width={size === 'small' ? '62' : '171'}
+      height={size === 'small' ? '58' : '170'}
       viewBox="0 0 171 170"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

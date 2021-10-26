@@ -21,6 +21,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Link href="/question/New">
         <a>New Question</a>
       </Link>
+      -
+      <Link href="/question/All">
+        <a>All Question</a>
+      </Link>
+      -
       <Link href="/api/getContacts">
         <a>getContacts</a>
       </Link>
