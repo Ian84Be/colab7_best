@@ -3,7 +3,7 @@ import Router from 'next/router'
 import { Accordion } from 'semantic-ui-react'
 import styles from '../styles/Form.module.css'
 
-export type QuestionProps = {
+export type AnswerProps = {
   id: number
   food: {
     name: string
@@ -19,7 +19,7 @@ export type QuestionProps = {
   location: string
 }
 
-const Answer: React.FC<{ question: QuestionProps }> = ({
+const Answer: React.FC<{ question: AnswerProps }> = ({
   activeIndex,
   setActiveIndex,
   question,

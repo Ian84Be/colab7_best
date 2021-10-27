@@ -1,14 +1,22 @@
 import { Prisma, PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
 import categories from './categories'
 import occasions from './occasions'
+import makeQuestions from './questions'
+import makeAnswers from './answers'
+const prisma = new PrismaClient()
+export const maxQuestions = 10
 
-const categoryData: Prisma.FoodCreateInput[] = categories.map((data) => ({
+const questionData = makeQuestions(maxQuestions)
+const answerData = makeAnswers()
+
+const categoryData: Prisma.FoodCreateManyInput[] = categories.map((data) => ({
   name: data,
 }))
-const occasionData: Prisma.OccasionCreateInput[] = occasions.map((data) => ({
-  name: data,
-}))
+const occasionData: Prisma.OccasionCreateManyInput[] = occasions.map(
+  (data) => ({
+    name: data,
+  })
+)
 
 async function truncateTables() {
   const tableNames = await prisma.$queryRaw<
@@ -50,13 +58,20 @@ async function main() {
   await resetSequences()
 
   console.log(`seeding ${categories.length} foods...`)
-  for (const data of categoryData) {
-    await prisma.food.create({ data })
-  }
+  await prisma.food.createMany({ data: categoryData })
 
   console.log(`seeding ${occasions.length} occasions...`)
-  for (const data of occasionData) {
-    await prisma.occasion.create({ data })
+  await prisma.occasion.createMany({ data: occasionData })
+
+  console.log(`seeding ${questionData.length} questions...`)
+  // await prisma.question.createMany({ data: questionData })
+  for (const data of questionData) {
+    await prisma.question.create({ data })
+  }
+
+  console.log(`seeding ${answerData.length} answers...`)
+  for (const data of answerData) {
+    await prisma.answer.create({ data })
   }
 }
 
