@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Form } from 'semantic-ui-react'
-import { useForm } from '../../hooks/useForm'
+import { useForm } from '../../lib/useForm'
 import styles from '../../styles/Form.module.css'
 import Step1 from './Step1'
 import Step2 from './Step2'

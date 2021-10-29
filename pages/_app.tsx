@@ -18,16 +18,20 @@ function MyApp({ Component, pageProps }: AppProps) {
         </Head>
         <Component {...pageProps} />
       </div>
+      <Link href="/">
+        <a>Home</a>
+      </Link>
+      -
       <Link href="/question/New">
         <a>New Question</a>
       </Link>
       -
-      <Link href="/question/All">
-        <a>All Question</a>
+      <Link href="/Responses">
+        <a>Responses</a>
       </Link>
       -
-      <Link href="/api/getContacts">
-        <a>getContacts</a>
+      <Link href="/response/3?name=Ian Be">
+        <a>AnswerForm</a>
       </Link>
     </Provider>
   )

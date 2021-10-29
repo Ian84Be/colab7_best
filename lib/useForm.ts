@@ -4,7 +4,10 @@ export const useForm = (callback: any, initialState = {}) => {
   const [formData, setFormData] = useState(initialState)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [event.target.name]: event.target.value })
+    const { name, value } = event.target
+    name === 'letMeKnow'
+      ? setFormData({ ...formData, [name]: !formData[name] })
+      : setFormData({ ...formData, [name]: value })
   }
 
   const handleDropdown = (

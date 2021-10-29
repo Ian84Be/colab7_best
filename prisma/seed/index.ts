@@ -6,9 +6,6 @@ import makeAnswers from './answers'
 const prisma = new PrismaClient()
 export const maxQuestions = 10
 
-const questionData = makeQuestions(maxQuestions)
-const answerData = makeAnswers()
-
 const categoryData: Prisma.FoodCreateManyInput[] = categories.map((data) => ({
   name: data,
 }))
@@ -57,6 +54,8 @@ async function main() {
   await truncateTables()
   await resetSequences()
 
+  const questionData = makeQuestions(maxQuestions)
+
   console.log(`seeding ${categories.length} foods...`)
   await prisma.food.createMany({ data: categoryData })
 
@@ -69,6 +68,7 @@ async function main() {
     await prisma.question.create({ data })
   }
 
+  const answerData = await makeAnswers(prisma)
   console.log(`seeding ${answerData.length} answers...`)
   for (const data of answerData) {
     await prisma.answer.create({ data })

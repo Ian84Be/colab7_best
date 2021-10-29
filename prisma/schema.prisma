@@ -24,15 +24,16 @@ model Question {
   createdAt  DateTime  @default(now()) @map("created_at")
   expires    DateTime?
   slug       String?
-  Answer     Answer[]
+  answers    Answer[]
 
   @@map("questions")
 }
 
 model Answer {
   id         Int      @id @default(autoincrement())
-  userId     Int?
+  name       String?
   answer     String
+  yelpId     String?
   comment    String?
   questionId Int
   question   Question @relation(fields: [questionId], references: [id])
@@ -46,8 +47,8 @@ model Occasion {
   name      String   @unique
   createdAt DateTime @default(now()) @map("created_at")
 
+  questions Question[]
   @@map("occasions")
-  Question Question[]
 }
 
 model Food {
@@ -55,8 +56,8 @@ model Food {
   name      String   @unique
   createdAt DateTime @default(now()) @map("created_at")
 
+  questions Question[]
   @@map("foods")
-  Question Question[]
 }
 
 model User {

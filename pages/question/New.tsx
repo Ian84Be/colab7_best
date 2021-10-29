@@ -44,7 +44,7 @@ const NewQuestion: NextPage<Props> = (props) => {
           </a>
         </Link>
 
-        <Link href="/">
+        <Link href="/Responses">
           <a className={styles.footer_button}>Responses</a>
         </Link>
       </footer>

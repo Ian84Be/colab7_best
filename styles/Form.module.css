@@ -10,17 +10,13 @@
 }
 
 .accordion_title {
-  border-top: 1px solid #c8d7d7;
-  border-bottom: 1px solid #c8d7d7;
+  border-top: 1px solid var(--grey);
+  border-bottom: 1px solid var(--grey);
   width: 100%;
 }
 .titleText {
   padding: 8px 11px 8px 16px;
   /* margin: 8px; */
-}
-
-.hidden {
-  display: none;
 }
 
 .progressContainer {
@@ -94,6 +90,9 @@
 
 .label {
   display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  justify-content: center;
   font-style: normal;
   font-weight: normal;
   font-size: 16px;
@@ -105,6 +104,8 @@
   font-family: Moki;
   color: var(--primary);
   margin-right: 4px;
+  margin-left: 4px;
+  margin-bottom: -4px;
 }
 
 .input {
@@ -192,4 +193,9 @@
   line-height: 23px;
   color: #05343a;
   font-weight: 700;
+}
+.checkbox {
+  margin: 8px;
+  margin-bottom: 24px;
+  align-self: end;
 }

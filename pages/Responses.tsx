@@ -1,17 +1,15 @@
 import type { NextPage, GetStaticProps } from 'next'
 import React, { useState } from 'react'
-import Link from 'next/link'
 import Head from 'next/head'
-import BestLogo from '../../components/BestLogo'
-import styles from '../../styles/Home.module.css'
-import prisma from '../../lib/prisma'
+import BestLogo from '../components/BestLogo'
+import styles from '../styles/Home.module.css'
+import prisma from '../lib/prisma'
 import { signIn, signOut, useSession } from 'next-auth/client'
-import Router from 'next/router'
-import Answer, { AnswerProps } from '../../components/Answer'
+import Question, { QuestionProps } from '../components/QuestionsWithResponses'
 import { Accordion } from 'semantic-ui-react'
 
 export const getStaticProps: GetStaticProps = async () => {
-  const feed = await prisma.answer.findMany({
+  const feed = await prisma.question.findMany({
     select: {
       id: true,
       food: {
@@ -25,24 +23,31 @@ export const getStaticProps: GetStaticProps = async () => {
       author: {
         select: { name: true },
       },
+      answers: {
+        select: {
+          answer: true,
+          comment: true,
+          id: true,
+        },
+      },
     },
   })
-  console.log({ feed })
+  // console.log({ feed })
   return { props: { feed } }
 }
 
 type Props = {
-  feed: AnswerProps[]
+  feed: QuestionProps[]
 }
 
-const AllAnswers: NextPage<Props> = (props) => {
+const Responses: NextPage<Props> = (props) => {
   const [session, loading] = useSession()
   const [activeIndex, setActiveIndex] = useState(null)
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>BEST - All Answers</title>
+        <title>BEST - All Questions</title>
         <meta name="description" content="colab7_best" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
@@ -51,7 +56,7 @@ const AllAnswers: NextPage<Props> = (props) => {
         <BestLogo size="small" />
         <Accordion fluid exclusive={false}>
           {props.feed.map((question) => (
-            <Answer
+            <Question
               key={question.id}
               activeIndex={activeIndex}
               setActiveIndex={setActiveIndex}
@@ -64,4 +69,4 @@ const AllAnswers: NextPage<Props> = (props) => {
   )
 }
 
-export default AllAnswers
+export default Responses

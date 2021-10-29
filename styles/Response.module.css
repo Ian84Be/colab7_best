@@ -1,0 +1,50 @@
+.responseContainer {
+  background: #f8f8f8;
+}
+
+.row {
+  display: flex;
+  padding: 20px 20px 20px 16px;
+  border-bottom: 1px solid var(--grey);
+  align-items: center;
+}
+
+.rankNumber {
+  border-radius: 50%;
+  width: 48px;
+  height: 47px;
+
+  background: #05343a;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: Mulish, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 35px;
+
+  color: #f8f8f8;
+}
+
+.topRank {
+  background: #ea3858;
+}
+
+.section {
+  /* border: 1px solid red; */
+  margin-left: 22px;
+}
+
+.name {
+  font-size: 16px;
+  line-height: 23px;
+  margin: 0;
+}
+
+.votes {
+  font-size: 16px;
+  line-height: 23px;
+}
