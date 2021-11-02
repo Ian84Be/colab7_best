@@ -12,6 +12,10 @@ const getFromYelp = async (term, location) => {
 						business {
 							name
 							id
+							coordinates{
+								latitude
+								longitude
+							}
 						}
 					}
 				}`,
@@ -36,12 +40,6 @@ const getFromYelp = async (term, location) => {
 
 const makeAnswers = async (prisma) => {
   const comment = 'o ya the best'
-  // const randomAnswers = [
-  //   faker.random.words(2),
-  //   faker.random.words(2),
-  //   faker.random.words(2),
-  //   faker.random.words(2),
-  // ]
 
   const result = []
   for (let i = 0; i < maxQuestions; i++) {
@@ -66,10 +64,13 @@ const makeAnswers = async (prisma) => {
       : questionInfo.occasion.name
 
     let answer = await getFromYelp(term, questionInfo.location)
+    // console.log({ answer })
 
     const fakeData = {
       answer: answer.name,
       yelpId: answer.id,
+      lat: answer.coordinates.latitude.toString(),
+      lng: answer.coordinates.longitude.toString(),
       comment,
       question,
       name,

@@ -34,6 +34,8 @@ model Answer {
   name       String?
   answer     String
   yelpId     String?
+  lat        String?
+  lng        String?
   comment    String?
   questionId Int
   question   Question @relation(fields: [questionId], references: [id])

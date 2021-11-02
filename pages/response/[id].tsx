@@ -1,6 +1,6 @@
 import type { GetServerSideProps } from 'next'
 import prisma from '../../lib/prisma'
-import AnswerForm from '../../components/AnswerForm'
+import AnswerForm from '../../components/ResponseForm'
 import { QuestionProps } from '../../components/QuestionsWithResponses'
 
 export const getServerSideProps: GetServerSideProps = async ({

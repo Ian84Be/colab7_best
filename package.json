@@ -12,6 +12,7 @@
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed"
   },
   "dependencies": {
+    "@googlemaps/js-api-loader": "^1.12.7",
     "@next-auth/prisma-adapter": "^0.5.4",
     "@prisma/client": "^3.2.1",
     "googleapis": "^89.0.0",
@@ -21,10 +22,10 @@
     "react-dom": "17.0.2",
     "sass": "^1.43.2",
     "semantic-ui-css": "^2.4.1",
-    "semantic-ui-react": "^2.0.4",
-    "swr": "^1.0.1"
+    "semantic-ui-react": "^2.0.4"
   },
   "devDependencies": {
+    "@types/google.maps": "^3.46.0",
     "@types/react": "17.0.29",
     "axios": "^0.24.0",
     "eslint": "7.32.0",

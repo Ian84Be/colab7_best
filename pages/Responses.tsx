@@ -28,6 +28,7 @@ export const getStaticProps: GetStaticProps = async () => {
           answer: true,
           comment: true,
           id: true,
+          questionId: true,
         },
       },
     },
@@ -47,7 +48,7 @@ const Responses: NextPage<Props> = (props) => {
   return (
     <div className={styles.container}>
       <Head>
-        <title>BEST - All Questions</title>
+        <title>BEST - Responses</title>
         <meta name="description" content="colab7_best" />
         <link rel="icon" href="/favicon.ico" />
       </Head>

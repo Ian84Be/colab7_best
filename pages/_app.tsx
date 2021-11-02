@@ -31,7 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Link>
       -
       <Link href="/response/3?name=Ian Be">
-        <a>AnswerForm</a>
+        <a>responseForm</a>
       </Link>
     </Provider>
   )

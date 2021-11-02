@@ -1,4 +1,5 @@
 import React from 'react'
+import Script from 'next/script'
 import styles from '../../styles/Form.module.css'
 import { Dropdown, Input } from 'semantic-ui-react'
 
@@ -15,6 +16,9 @@ const Step1: React.FC<Props> = ({
 }) => {
   return (
     <>
+      <Script
+        src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}&libraries=places`}
+      />
       <label htmlFor="food" className={styles.label}>
         What are you looking for?
       </label>
