@@ -18,6 +18,9 @@ model Question {
   food       Food?     @relation(fields: [foodId], references: [id])
   occasionId Int?
   occasion   Occasion? @relation(fields: [occasionId], references: [id])
+  placeId    String?
+  lat        Float?
+  lng        Float?
   message    String?
   location   String?
   contacts   Json?
@@ -34,8 +37,9 @@ model Answer {
   name       String?
   answer     String
   yelpId     String?
-  lat        String?
-  lng        String?
+  placeId    String?
+  lat        Float?
+  lng        Float?
   comment    String?
   questionId Int
   question   Question @relation(fields: [questionId], references: [id])

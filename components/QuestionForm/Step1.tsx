@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Script from 'next/script'
+import Image from 'next/image'
 import styles from '../../styles/Form.module.css'
-import { Dropdown, Input } from 'semantic-ui-react'
+import { Dropdown } from 'semantic-ui-react'
+import { usePlacesAutocomplete } from '../../lib/googleAutocomplete'
+import poweredByGoogleImage from '../../public/images/powered_by_google_on_non_white.png'
 
 export type FormProps = {
   formData: FormData
@@ -12,8 +15,26 @@ const Step1: React.FC<Props> = ({
   occasionOptions,
   formData,
   handleDropdown,
-  handleChange,
+  searchTerm,
+  handleSearchChange,
 }) => {
+  const predictions = usePlacesAutocomplete(searchTerm)
+  // console.log({ formData, predictions })
+  // console.log('formData.location', formData.location)
+
+  const [locOptions, setLocOptions] = useState([])
+
+  useEffect(() => {
+    if (predictions?.length > 0) {
+      const data = predictions.map((p) => ({
+        key: p.place_id,
+        text: p.description,
+        value: `${p.description}|${p.place_id}`,
+      }))
+      setLocOptions(data)
+    }
+  }, [predictions])
+
   return (
     <>
       <Script
@@ -53,14 +74,24 @@ const Step1: React.FC<Props> = ({
       <label htmlFor="location" className={styles.label}>
         IN
       </label>
-      <Input
+      <Dropdown
         className={styles.input}
         id="location"
         name="location"
-        type="text"
-        onChange={handleChange}
         placeholder="location"
+        search
+        selection
+        onChange={handleDropdown}
+        onSearchChange={handleSearchChange}
+        options={locOptions}
+        searchQuery={searchTerm}
         value={formData.location}
+      />
+      <Image
+        src={poweredByGoogleImage}
+        alt="Powered by Google"
+        width="144"
+        height="18"
       />
     </>
   )

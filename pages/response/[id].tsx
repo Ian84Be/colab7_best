@@ -1,7 +1,7 @@
 import type { GetServerSideProps } from 'next'
 import prisma from '../../lib/prisma'
 import AnswerForm from '../../components/ResponseForm'
-import { QuestionProps } from '../../components/QuestionsWithResponses'
+import { QuestionProps } from '../../components/ResponseTable'
 
 export const getServerSideProps: GetServerSideProps = async ({
   query,
@@ -18,6 +18,9 @@ export const getServerSideProps: GetServerSideProps = async ({
       author: { select: { name: true } },
       location: true,
       message: true,
+      placeId: true,
+      lat: true,
+      lng: true,
     },
   })
   // console.log('getServerSideProps question', question)

@@ -7,13 +7,16 @@ export default async function handler(
   res: NextApiResponse
 ) {
   console.log(req.body)
-  const { questionId, answer, comment, name } = req.body
+  const { questionId, answer, comment, name, placeId, lat, lng } = req.body
 
   const newAnswer = await prisma.answer.create({
     data: {
       name,
       answer,
       comment,
+      placeId,
+      lat,
+      lng,
       question: { connect: { id: Number(questionId) } },
     },
   })

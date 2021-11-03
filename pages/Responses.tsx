@@ -5,7 +5,7 @@ import BestLogo from '../components/BestLogo'
 import styles from '../styles/Home.module.css'
 import prisma from '../lib/prisma'
 import { signIn, signOut, useSession } from 'next-auth/client'
-import Question, { QuestionProps } from '../components/QuestionsWithResponses'
+import ResponseTable, { QuestionProps } from '../components/ResponseTable'
 import { Accordion } from 'semantic-ui-react'
 
 export const getStaticProps: GetStaticProps = async () => {
@@ -57,7 +57,7 @@ const Responses: NextPage<Props> = (props) => {
         <BestLogo size="small" />
         <Accordion fluid exclusive={false}>
           {props.feed.map((question) => (
-            <Question
+            <ResponseTable
               key={question.id}
               activeIndex={activeIndex}
               setActiveIndex={setActiveIndex}

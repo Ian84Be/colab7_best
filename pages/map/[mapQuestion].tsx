@@ -37,7 +37,6 @@ const View: React.FC<Props> = ({ answers, lat, lng }) => {
   const [activeIndex, setActiveIndex] = useState(false)
   const rankedResult = rank(answers)
   // console.log({ rankedResult })
-  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY
 
   lat = parseFloat(lat)
   lng = parseFloat(lng)
@@ -46,7 +45,7 @@ const View: React.FC<Props> = ({ answers, lat, lng }) => {
 
   useEffect(() => {
     const loader = new Loader({
-      apiKey,
+      apiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY,
     })
     if (googleMap.current && !map)
       loader.load().then(() => {
@@ -62,11 +61,11 @@ const View: React.FC<Props> = ({ answers, lat, lng }) => {
           fullscreenControl: false,
         })
 
-        console.log({ map, answers })
-        answers.forEach((a) => addMarker(a, myMap))
+        // console.log({ map, answers })
+        answers.forEach((answer) => addMarker(rankedResult[0], answer, myMap))
         setMap(myMap)
       })
-  }, [googleMap, map])
+  }, [answers, rankedResult, googleMap, map, lat, lng])
 
   return (
     <div className={styles.answer_content}>

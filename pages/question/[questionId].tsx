@@ -1,8 +1,6 @@
 import type { GetServerSideProps } from 'next'
 import prisma from '../../lib/prisma'
-import Question, {
-  QuestionProps,
-} from '../../components/QuestionsWithResponses'
+import ResponseTable, { QuestionProps } from '../../components/ResponseTable'
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const question = await prisma.question.findUnique({
@@ -30,7 +28,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 }
 
 const View: React.FC<QuestionProps> = ({ question }) => {
-  return <Question question={question} />
+  return <ResponseTable question={question} />
 }
 
 export default View

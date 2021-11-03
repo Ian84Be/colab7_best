@@ -60,18 +60,17 @@ export const mapMarker = {
   path: 'M26.6812 38.8568C34.4415 36.1072 40 28.7027 40 20C40 8.9543 31.0457 0 20 0C8.9543 0 0 8.9543 0 20C0 28.7027 5.55845 36.1072 13.3188 38.8568L20 44L26.6812 38.8568Z',
 }
 
-export function addMarker(a, myMap) {
+export function addMarker(topRank, a, myMap) {
   let { lat, lng, answer } = a
-  lat = parseFloat(lat)
-  lng = parseFloat(lng)
 
   const svgData = {
     anchor: new google.maps.Point(mapMarker.width / 2, mapMarker.height / 2),
     path: mapMarker.path,
-    fillColor: '#EA3858',
+    fillColor: '#CACACA',
     fillOpacity: 1,
     strokeOpacity: 0,
   }
+  if (topRank.name === answer) svgData.fillColor = '#EA3858'
 
   new google.maps.Marker({
     map: myMap,

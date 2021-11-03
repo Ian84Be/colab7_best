@@ -4,6 +4,7 @@ import { useForm } from '../../lib/useForm'
 import styles from '../../styles/Form.module.css'
 import SignInGoogleButton from '../SignInGoogleButton'
 import Step1 from './Step1'
+import { googleLatLng } from '../../lib/googleAutocomplete'
 
 export type FormData = {
   answer: string
@@ -27,6 +28,10 @@ const AnswerForm: React.FC<Props> = ({ question, name }) => {
   const submitData = async (): Promise<any> => {
     console.log('submitData()', formData)
 
+    const { lat, lng } = await googleLatLng(formData.placeId)
+    formData.lat = lat
+    formData.lng = lng
+
     const response = await fetch(localApi + 'createAnswer', {
       method: 'POST',
       headers: {
@@ -44,10 +49,14 @@ const AnswerForm: React.FC<Props> = ({ question, name }) => {
     console.log('submitData() response', response)
   }
 
-  const { formData, handleChange, handleDropdown, handleSubmit } = useForm(
-    submitData,
-    formState
-  )
+  const {
+    formData,
+    handleChange,
+    handleDropdown,
+    handleSubmit,
+    handleSearchChange,
+    searchTerm,
+  } = useForm(submitData, formState)
 
   return (
     <div className={styles.content} style={{ justifyContent: 'center' }}>
@@ -60,6 +69,9 @@ const AnswerForm: React.FC<Props> = ({ question, name }) => {
             formData={formData}
             handleChange={handleChange}
             question={question}
+            handleSearchChange={handleSearchChange}
+            searchTerm={searchTerm}
+            handleDropdown={handleDropdown}
           />
         )}
         {formStep === 2 && (

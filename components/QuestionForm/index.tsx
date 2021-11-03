@@ -7,6 +7,7 @@ import Step2 from './Step2'
 import Step3 from './Step3'
 import Step4 from './Step4'
 import Progress from './Progress'
+import { googleLatLng } from '../../lib/googleAutocomplete'
 
 export type FormData = {
   food: string
@@ -48,10 +49,15 @@ const QuestionForm: React.FC<Props> = (props) => {
     location: '',
     contacts: [],
     message: defaultMessage,
+    placeId: '',
   }
 
   const submitData = async (): Promise<any> => {
     console.log({ formData })
+
+    const { lat, lng } = await googleLatLng(formData.placeId)
+    formData.lat = lat
+    formData.lng = lng
 
     const response = await fetch(localApi + 'createQuestion', {
       method: 'POST',
@@ -69,10 +75,14 @@ const QuestionForm: React.FC<Props> = (props) => {
     console.log('submitData() response', response)
   }
 
-  const { formData, handleChange, handleDropdown, handleSubmit } = useForm(
-    submitData,
-    formState
-  )
+  const {
+    formData,
+    handleSearchChange,
+    handleChange,
+    handleDropdown,
+    handleSubmit,
+    searchTerm,
+  } = useForm(submitData, formState)
 
   const handleStepChange = (e) => {
     // console.log(e.target.innerText)
@@ -101,7 +111,8 @@ const QuestionForm: React.FC<Props> = (props) => {
             occasionOptions={props.occasionOptions}
             formData={formData}
             handleDropdown={handleDropdown}
-            handleChange={handleChange}
+            searchTerm={searchTerm}
+            handleSearchChange={handleSearchChange}
           />
         )}
         {formStep === 2 && (

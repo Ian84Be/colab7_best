@@ -1,10 +1,44 @@
-import { Input, Checkbox, TextArea } from 'semantic-ui-react'
+import React, { useState, useEffect } from 'react'
+import { Dropdown, Checkbox, TextArea } from 'semantic-ui-react'
+import { usePlacesAutocomplete } from '../../lib/googleAutocomplete'
+import Image from 'next/image'
+import Script from 'next/script'
+import poweredByGoogleImage from '../../public/images/powered_by_google_on_non_white.png'
 import styles from '../../styles/Form.module.css'
 
-const Step1 = ({ question, formData, handleChange }) => {
-  const { food, occasion, author, location } = question
+const Step1 = ({
+  question,
+  formData,
+  handleChange,
+  handleDropdown,
+  handleSearchChange,
+  searchTerm,
+}) => {
+  const { food, occasion, author, location, lat, lng } = question
+  const predictions = usePlacesAutocomplete(searchTerm, ['establishment'], {
+    lat,
+    lng,
+  })
+  console.log({ formData, predictions })
+
+  const [locOptions, setLocOptions] = useState([])
+
+  useEffect(() => {
+    if (predictions?.length > 0) {
+      const data = predictions.map((p) => ({
+        key: p.place_id,
+        text: p.description,
+        value: `${p.description}|${p.place_id}`,
+      }))
+      setLocOptions(data)
+    }
+  }, [predictions])
+
   return (
     <>
+      <Script
+        src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY}&libraries=places`}
+      />
       <p>Help {author?.name} out.</p>
       <div className={styles.label}>
         {`What's`} the <div className={styles.logoFont}>BEST</div> place for
@@ -17,14 +51,24 @@ const Step1 = ({ question, formData, handleChange }) => {
         The <div className={styles.logoFont}>BEST!</div>
       </div>
 
-      <Input
-        className={styles.input}
+      <Dropdown
         id="answer"
         name="answer"
-        type="text"
-        onChange={handleChange}
         placeholder="answer"
+        search
+        selection
+        className={styles.input}
+        onChange={handleDropdown}
+        onSearchChange={handleSearchChange}
+        options={locOptions}
+        searchQuery={searchTerm}
         value={formData.answer}
+      />
+      <Image
+        src={poweredByGoogleImage}
+        alt="Powered by Google"
+        width="144"
+        height="18"
       />
       <Checkbox
         id="letMeKnow"

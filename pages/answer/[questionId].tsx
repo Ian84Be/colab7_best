@@ -17,6 +17,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   params,
 }) => {
   const { best } = query
+  console.log({ query, params })
   const answers = await prisma.answer.findMany({
     where: {
       questionId: Number(params?.questionId) || -1,
@@ -33,17 +34,17 @@ export const getServerSideProps: GetServerSideProps = async ({
       comment: true,
     },
   })
-  console.log('answers[0].yelpId', answers[0].yelpId)
-  const yelpId = answers[0].yelpId
+  console.log('answers[0]', answers[0])
+  const { answer, yelpId, lat, lng } = answers[0]
   const yelpSearchQuery = `query searchByTerm {
-		search(term: "${answers[0].answer}", location: "usa", limit: 1) {
+		search(latitude: ${lat}, longitude:${lng},  radius: 20, limit: 1) {
 			business {
 				...businessFields
 			}
 		}
 	}`
   const yelpIdQuery = `query findById {
-			business(id: "${answers[0].yelpId}") {
+			business(id: "${yelpId}") {
 				...businessFields
 			}
 		}
