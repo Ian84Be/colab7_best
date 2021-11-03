@@ -20,16 +20,22 @@ export const googleLatLng = async (placeId: string) => {
   return { lat, lng }
 }
 
+export type googleCoords = {
+  lat: number | null
+  lng: number | null
+}
+
 export const googleAutocomplete = async (
   text: string,
   types: Array<string>,
-  { lat, lng }
-) => {
+  coords: googleCoords
+): Promise<any> => {
   return new Promise((resolve, reject) => {
+    const { lat, lng } = coords
     if (!text) return reject('need text input')
     if (typeof window === 'undefined') return reject('need window object')
 
-    const options = {
+    const options: google.maps.places.AutocompletionRequest = {
       input: text,
       componentRestrictions: { country: 'us' },
       types,
@@ -60,16 +66,19 @@ export function usePlacesAutocomplete(
   location = { lat: null, lng: null },
   debounceTimeout = 400
 ) {
-  const [predictions, setPredictions] = useState([])
+  const [predictions, setPredictions] = useState<
+    Array<google.maps.places.AutocompletePrediction>
+  >([])
   const { lat, lng } = location
   useEffect(() => {
     const handleDebounce = setTimeout(async () => {
       try {
         if (!text) return
-        let nextPredictions = await googleAutocomplete(text, types, {
-          lat,
-          lng,
-        })
+        let nextPredictions: Array<google.maps.places.AutocompletePrediction> =
+          await googleAutocomplete(text, types, {
+            lat,
+            lng,
+          })
         setPredictions(nextPredictions)
       } catch (err) {
         console.error(err)

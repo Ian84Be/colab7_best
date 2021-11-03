@@ -20,7 +20,7 @@ type QuestionSeed = {
   contacts: Contact[]
 }
 
-const makeQuestions = (num: number) => {
+const makeQuestions = async (num: number) => {
   const message =
     'Hi everyone,\n\nI’m asking people whose taste I trust to give me a recommendation using the BEST app.  \n\nJust click on the BEST button to give me your recommendation!'
 
@@ -35,7 +35,10 @@ const makeQuestions = (num: number) => {
     if (faker.datatype.boolean()) food = undefined
     else occasion = undefined
 
-    const location = faker.address.city()
+    const location = 'Buffalo, NY, USA'
+    const placeId = 'ChIJoeXfUmES04kRcYEfGKUEI5g'
+    const lat = 42.88644679999999
+    const lng = -78.8783689
 
     let contacts = []
     for (let j = randomNum; j < 4; j++) {
@@ -53,6 +56,9 @@ const makeQuestions = (num: number) => {
       message,
       location,
       contacts,
+      placeId,
+      lat,
+      lng,
     }
 
     result.push(fakeQuestion)

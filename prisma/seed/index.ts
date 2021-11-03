@@ -3,8 +3,34 @@ import categories from './categories'
 import occasions from './occasions'
 import makeQuestions from './questions'
 import makeAnswers from './answers'
+import axios from 'axios'
+
 const prisma = new PrismaClient()
+
 export const maxQuestions = 10
+
+export const getFromYelp = async (query: string) => {
+  const response = await axios
+    .post(
+      'https://api.yelp.com/v3/graphql',
+      { query },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${process.env.YELP_API_KEY}`,
+        },
+      }
+    )
+    .then((res) => {
+      // console.log(res)
+      return res.data.data.search
+    })
+    .catch((err) => console.log(err))
+  // console.log('getfromyelp response', response)
+  // console.log('getfromyelp response', response.business[0])
+  const result = response.business
+  return result
+}
 
 const categoryData: Prisma.FoodCreateManyInput[] = categories.map((data) => ({
   name: data,
@@ -54,7 +80,7 @@ async function main() {
   await truncateTables()
   await resetSequences()
 
-  const questionData = makeQuestions(maxQuestions)
+  const questionData = await makeQuestions(maxQuestions)
 
   console.log(`seeding ${categories.length} foods...`)
   await prisma.food.createMany({ data: categoryData })

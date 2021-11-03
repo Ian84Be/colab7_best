@@ -35,7 +35,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     },
   })
   console.log('answers[0]', answers[0])
-  const { answer, yelpId, lat, lng } = answers[0]
+  const { yelpId, lat, lng } = answers[0]
   const yelpSearchQuery = `query searchByTerm {
 		search(latitude: ${lat}, longitude:${lng},  radius: 20, limit: 1) {
 			business {

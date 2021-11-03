@@ -1,45 +1,8 @@
-import { maxQuestions } from './index'
-const axios = require('axios')
+import { maxQuestions, getFromYelp } from './index'
 const faker = require('faker')
 
-const getFromYelp = async (term, location) => {
-  const response = await axios
-    .post(
-      'https://api.yelp.com/v3/graphql',
-      {
-        query: `{
-					search(term: "${term}", location: "usa", limit: 1) {
-						business {
-							name
-							id
-							coordinates{
-								latitude
-								longitude
-							}
-						}
-					}
-				}`,
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${process.env.YELP_API_KEY}`,
-        },
-      }
-    )
-    .then((res) => {
-      // console.log(res)
-      return res.data.data.search
-    })
-    .catch((err) => console.log(err))
-  // console.log('getfromyelp response', response)
-  // console.log('getfromyelp response', response.business[0])
-  const result = response.business[0]
-  return result
-}
-
 const makeAnswers = async (prisma) => {
-  const comment = 'o ya the best'
+  const comment = 'seed'
 
   const result = []
   for (let i = 0; i < maxQuestions; i++) {
@@ -53,9 +16,11 @@ const makeAnswers = async (prisma) => {
         occasion: { select: { name: true } },
         location: true,
         contacts: true,
+        lat: true,
+        lng: true,
       },
     })
-    // console.log(questionInfo.contacts)
+    // console.log({ questionInfo })
     randomNum = faker.datatype.number(questionInfo.contacts.length - 1)
     let { name } = questionInfo.contacts[randomNum]
 
@@ -63,14 +28,41 @@ const makeAnswers = async (prisma) => {
       ? questionInfo.food.name
       : questionInfo.occasion.name
 
-    let answer = await getFromYelp(term, questionInfo.location)
+    // const query = `query searchByTermUSA {
+    // 		search(term: "${term}", location: "usa", limit: 1) {
+    // 			business {
+    // 				name
+    // 				id
+    // 				coordinates{
+    // 					latitude
+    // 					longitude
+    // 				}
+    // 			}
+    // 		}
+    // 	}`
+
+    const query = `query searchByLatLng {
+    	search(term: "${term}", latitude: ${questionInfo.lat}, longitude:${questionInfo.lng}, radius: 20000 limit: 5) {
+    		business {
+    			name
+    			id
+    			coordinates{
+    				latitude
+    				longitude
+    			}
+    		}
+    	}
+    }`
+    let answer = await getFromYelp(query)
     // console.log({ answer })
+    randomNum = faker.datatype.number(answer.length - 1)
+    const randomAnswer = answer[randomNum]
 
     const fakeData = {
-      answer: answer.name,
-      yelpId: answer.id,
-      lat: answer.coordinates.latitude.toString(),
-      lng: answer.coordinates.longitude.toString(),
+      answer: randomAnswer.name,
+      yelpId: randomAnswer.id,
+      lat: randomAnswer.coordinates.latitude,
+      lng: randomAnswer.coordinates.longitude,
       comment,
       question,
       name,
