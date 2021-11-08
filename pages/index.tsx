@@ -1,7 +1,7 @@
 import type { NextPage } from 'next'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import BestLogo from '../components/BestLogo'
+import BestLogo from '../components/Icons/BestLogo'
 import { signIn, signOut, useSession } from 'next-auth/client'
 import SignInGoogleButton from '../components/SignInGoogleButton'
 import { Loader } from 'semantic-ui-react'

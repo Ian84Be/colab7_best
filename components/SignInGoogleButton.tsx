@@ -1,4 +1,4 @@
-import GoogleLogo from './GoogleLogo'
+import GoogleLogo from './Icons/GoogleLogo'
 import styles from '../styles/Home.module.css'
 import { signIn } from 'next-auth/client'
 

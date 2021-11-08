@@ -1,13 +1,27 @@
+.answer_header {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  width: 100%;
+}
+.answer_header svg {
+  margin: 16px;
+}
+.answer_header svg:hover {
+  cursor: pointer;
+}
 .answer_title {
   font-size: 18px;
   line-height: 26px;
   text-align: center;
   margin: 16px;
 }
+
 .contactInfo {
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: flex-end;
-  margin: 16px;
+  /* margin: 16px; */
+  padding: 16px;
+  /* padding-top: 0; */
   display: flex;
   width: 100%;
 }
@@ -18,18 +32,39 @@
   justify-content: flex-start;
   /* padding: 20px 20px 16px 20px; */
   width: 375px;
-  height: 667px;
+  /* height: 667px; */
+  height: 100vh;
   border: 1px solid var(--grey);
 }
 .hours_row {
   display: flex;
   margin: 16px;
 }
+.hours_row_expand {
+  display: flex;
+  margin-left: 16px;
+}
 .hours_day {
   margin-right: 10px;
+  margin-bottom: 4px;
 }
 .googleMap {
   width: 100%;
-  height: 100%;
+  height: 100vh;
   border: 1px solid red;
+}
+.votedSection {
+  align-items: center;
+  background: #f8f8f8;
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid red; */
+  width: 100%;
+  padding: 16px;
+}
+.voteName {
+  align-self: flex-start;
+  font-size: 16px;
+  line-height: 23px;
+  /* margin-left: 16px; */
 }

@@ -1,16 +1,19 @@
 import type { GetServerSideProps } from 'next'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import prisma from '../../lib/prisma'
 import styles from '../../styles/Answer.module.css'
 import formStyles from '../../styles/Form.module.css'
 import Image from 'next/image'
-import { Accordion } from 'semantic-ui-react'
+import { Accordion, Icon } from 'semantic-ui-react'
 import {
   businessFieldsFragment,
   dayNames,
   displayTime,
 } from '../../lib/helpers'
+import ChevronDown from '../../components/Icons/Chevron'
+import FooterNav from '../../components/FooterNav'
 
 export const getServerSideProps: GetServerSideProps = async ({
   query,
@@ -85,7 +88,7 @@ const View: React.FC<Props> = ({ answers, best, yelpData }) => {
   const [activeIndex, setActiveIndex] = useState(false)
   const { display_phone, location, photos, url, hours } = yelpData
   const { questionId, lat, lng } = answers[0]
-  console.log({ questionId, lat, lng })
+  console.log({ questionId, lat, lng, hours })
 
   //yelp serves monday-sunday, but javascript date runs sunday-monday
   let dayNum = new Date().getDay()
@@ -94,7 +97,14 @@ const View: React.FC<Props> = ({ answers, best, yelpData }) => {
 
   return (
     <div className={styles.answer_content}>
-      <header className={styles.answer_title}>{best}</header>
+      <header className={styles.answer_header}>
+        <Link href="/Responses">
+          <a>
+            <ChevronDown rotate={90} />
+          </a>
+        </Link>
+        <div className={styles.answer_title}>{best}</div>
+      </header>
       <Image
         src={photos[0]}
         alt={best}
@@ -117,7 +127,7 @@ const View: React.FC<Props> = ({ answers, best, yelpData }) => {
         <p>{display_phone}</p>
       </div>
 
-      <Accordion fluid exclusive={false}>
+      <Accordion fluid>
         <Accordion.Title
           onClick={() => setActiveIndex(!activeIndex)}
           className={formStyles.accordion_title}
@@ -128,10 +138,14 @@ const View: React.FC<Props> = ({ answers, best, yelpData }) => {
             {displayTime(hours[0].open[dayNum].start)} -{' '}
             {displayTime(hours[0].open[dayNum].end)}
           </div>
+          <ChevronDown rotate={activeIndex ? 180 : 0} />
         </Accordion.Title>
-        <Accordion.Content active={activeIndex} style={{ padding: '0' }}>
+        <Accordion.Content
+          active={activeIndex}
+          style={{ padding: '0', margin: '16px 0 16px' }}
+        >
           {hours[0].open.map((day) => (
-            <div className={styles.hours_row} key={day.day}>
+            <div className={styles.hours_row_expand} key={day.day}>
               <p className={styles.hours_day}>{dayNames[day.day]}</p>
               <p className={styles.hours_time}>
                 {displayTime(day.start)} - {displayTime(day.end)}
@@ -141,17 +155,22 @@ const View: React.FC<Props> = ({ answers, best, yelpData }) => {
         </Accordion.Content>
       </Accordion>
 
-      <section>
+      <section className={styles.votedSection}>
         <div className={formStyles.titleText}>
           Voted
-          <strong className={formStyles.hilite}>BEST</strong> by:
+          <strong className={formStyles.logoFont}>BEST</strong>by:
         </div>
 
         {answers.map((a) => {
-          // console.log(a)
-          return <div key={a.id}>{a.name}</div>
+          console.log(a)
+          return (
+            <div className={styles.voteName} key={a.id}>
+              {a.name} {a.comment && <Icon name="file alternate outline" />}
+            </div>
+          )
         })}
       </section>
+      <FooterNav />
     </div>
   )
 }

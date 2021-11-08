@@ -34,7 +34,7 @@ export function displayTime(militaryTime: string): string {
   let converted = 0
   if (milTime < 100) converted = milTime + 1200
   if (milTime < 1300) converted = milTime
-  if (milTime > 1300) converted = milTime - 1200
+  if (milTime >= 1300) converted = milTime - 1200
   let result = converted.toString()
   if (result.length === 3 && result[1] !== '3' && result[2] === '0')
     result = result[0]

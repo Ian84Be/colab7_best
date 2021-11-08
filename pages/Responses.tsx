@@ -1,7 +1,7 @@
 import type { NextPage, GetStaticProps } from 'next'
 import React, { useState } from 'react'
 import Head from 'next/head'
-import BestLogo from '../components/BestLogo'
+import BestLogo from '../components/Icons/BestLogo'
 import styles from '../styles/Home.module.css'
 import prisma from '../lib/prisma'
 import { signIn, signOut, useSession } from 'next-auth/client'

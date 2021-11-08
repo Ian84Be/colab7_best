@@ -5,6 +5,7 @@ import formStyles from '../styles/Form.module.css'
 import styles from '../styles/Response.module.css'
 import RankedResultCard from './RankedResultCard'
 import { rank } from '../lib/helpers'
+import ChevronDown from './Icons/Chevron'
 
 export type QuestionProps = {
   id: number
@@ -34,12 +35,16 @@ const ResponseTable: React.FC<{ question: QuestionProps }> = ({
   question,
 }) => {
   const { id, food, occasion, location, answers } = question
+  const handleExpand = (id: number) => {
+    if (activeIndex === id) setActiveIndex(null)
+    else setActiveIndex(id)
+  }
   if (answers.length > 0) {
     const rankedResult = rank(answers)
     return (
       <>
         <Accordion.Title
-          onClick={() => setActiveIndex(id)}
+          onClick={() => handleExpand(id)}
           className={formStyles.accordion_title}
         >
           <div className={formStyles.titleText}>
@@ -49,6 +54,7 @@ const ResponseTable: React.FC<{ question: QuestionProps }> = ({
             </strong>{' '}
             in <strong className={formStyles.location}>{location}</strong>
           </div>
+          <ChevronDown rotate={activeIndex === id ? 180 : 0} />
         </Accordion.Title>
         <Accordion.Content active={activeIndex === id} style={{ padding: '0' }}>
           <div className={styles.responseContainer}>
