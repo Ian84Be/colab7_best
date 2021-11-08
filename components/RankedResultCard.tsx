@@ -5,14 +5,14 @@ import styles from '../styles/Response.module.css'
 const RankedResultCard = ({ answer }) => {
   const router = useRouter()
   const { questionId, rank, name, count } = answer
-  let formatName = name.replace('&', '%26').replace('+', '%2B')
-  // console.log({ formatName })
 
   return (
     <div
       key={name}
       className={styles.row}
-      onClick={() => router.push(`/answer/${questionId}?best=${formatName}`)}
+      onClick={() =>
+        router.push(`/answer/${questionId}?best=${encodeURIComponent(name)}`)
+      }
     >
       <div className={`${styles.rankNumber} ${rank === 1 && styles.topRank}`}>
         {rank}

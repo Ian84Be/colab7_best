@@ -13,7 +13,7 @@ const SignInGoogleButton = () => {
       }
     >
       <GoogleLogo />
-      <p style={{ marginLeft: '15px' }}>Sign In with Google</p>
+      <p style={{ marginLeft: '24px' }}>Sign in with Google</p>
     </button>
   )
 }

@@ -7,6 +7,7 @@ import prisma from '../lib/prisma'
 import { signIn, signOut, useSession } from 'next-auth/client'
 import ResponseTable, { QuestionProps } from '../components/ResponseTable'
 import { Accordion } from 'semantic-ui-react'
+import FooterNav from '../components/FooterNav'
 
 export const getStaticProps: GetStaticProps = async () => {
   const feed = await prisma.question.findMany({
@@ -65,6 +66,7 @@ const Responses: NextPage<Props> = (props) => {
             />
           ))}
         </Accordion>
+        <FooterNav />
       </main>
     </div>
   )

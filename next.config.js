@@ -13,6 +13,7 @@ module.exports = {
       's3-media7.fl.yelpcdn.com',
       's3-media8.fl.yelpcdn.com',
       's3-media9.fl.yelpcdn.com',
+      'lh3.googleusercontent.com',
     ],
   },
 }

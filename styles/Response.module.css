@@ -8,6 +8,9 @@
   border-bottom: 1px solid var(--grey);
   align-items: center;
 }
+.row:hover {
+  cursor: pointer;
+}
 
 .rankNumber {
   border-radius: 50%;

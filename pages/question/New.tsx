@@ -1,11 +1,9 @@
 import React from 'react'
 import { NextPage, GetServerSidePropsContext } from 'next'
 import prisma from '../../lib/prisma'
-import Image from 'next/image'
-import Link from 'next/link'
 import styles from '../../styles/Form.module.css'
-import homeIcon from '../../public/images/home_button.svg'
 import QuestionForm from '../../components/QuestionForm'
+import FooterNav from '../../components/FooterNav'
 
 export async function getServerSideProps(context: GetServerSidePropsContext) {
   const foodData = await prisma.food.findMany({
@@ -37,17 +35,7 @@ const NewQuestion: NextPage<Props> = (props) => {
         foodOptions={props.foodOptions}
         occasionOptions={props.occasionOptions}
       />
-      <footer className={styles.footer}>
-        <Link href="/">
-          <a className={styles.footer_button}>
-            <Image src={homeIcon} alt="Home" width={24} height={24} />
-          </a>
-        </Link>
-
-        <Link href="/Responses">
-          <a className={styles.footer_button}>Responses</a>
-        </Link>
-      </footer>
+      <FooterNav />
     </div>
   )
 }

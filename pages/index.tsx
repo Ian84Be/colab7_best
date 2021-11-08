@@ -1,8 +1,11 @@
 import type { NextPage } from 'next'
+import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import BestLogo from '../components/BestLogo'
 import { signIn, signOut, useSession } from 'next-auth/client'
 import SignInGoogleButton from '../components/SignInGoogleButton'
+import { Loader } from 'semantic-ui-react'
+import FooterNav from '../components/FooterNav'
 
 const Home: NextPage = () => {
   const [session, loading] = useSession()
@@ -23,17 +26,10 @@ const Home: NextPage = () => {
           Only their favorite places.
         </h1>
 
-        <SignInGoogleButton />
+        {loading && <Loader />}
+        {!session && <SignInGoogleButton />}
       </main>
-
-      {loading && <p>loading...</p>}
-      {!session && <div>need tolog in</div>}
-      {session && (
-        <>
-          <p>signed in as {session.user?.name}</p>
-          <button onClick={() => signOut()}>sign out</button>
-        </>
-      )}
+      {session && <FooterNav />}
     </div>
   )
 }
