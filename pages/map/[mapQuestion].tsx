@@ -2,10 +2,8 @@ import type { GetServerSideProps } from 'next'
 import { useState, useRef, useEffect } from 'react'
 import prisma from '../../lib/prisma'
 import styles from '../../styles/Answer.module.css'
-import formStyles from '../../styles/Form.module.css'
 import { rank } from '../../lib/helpers'
 import RankedResultCard from '../../components/RankedResultCard'
-// import { Loader } from 'semantic-ui-react'
 import { Loader } from '@googlemaps/js-api-loader'
 import { addMarker } from '../../lib/helpers'
 
@@ -34,9 +32,8 @@ export const getServerSideProps: GetServerSideProps = async ({
 }
 
 const View: React.FC<Props> = ({ answers, lat, lng }) => {
-  const [activeIndex, setActiveIndex] = useState(false)
   const rankedResult = rank(answers)
-  // console.log({ rankedResult })
+  console.log({ rankedResult })
 
   lat = parseFloat(lat)
   lng = parseFloat(lng)

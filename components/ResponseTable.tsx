@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import Router from 'next/router'
+import React from 'react'
 import { Accordion } from 'semantic-ui-react'
 import formStyles from '../styles/Form.module.css'
 import styles from '../styles/Response.module.css'

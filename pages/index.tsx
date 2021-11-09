@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import BestLogo from '../components/Icons/BestLogo'
-import { signIn, signOut, useSession } from 'next-auth/client'
+import { signOut, useSession } from 'next-auth/client'
 import SignInGoogleButton from '../components/SignInGoogleButton'
 import { Loader } from 'semantic-ui-react'
 import FooterNav from '../components/FooterNav'
@@ -14,6 +14,7 @@ const Home: NextPage = () => {
       <main className={styles.mainBG}>
         <BestLogo size="big" />
         <h1
+          onClick={signOut}
           style={{
             fontFamily: 'Mulish, sans-serif',
             fontSize: '22px',
