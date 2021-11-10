@@ -4,7 +4,6 @@ import Head from 'next/head'
 import BestLogo from '../components/Icons/BestLogo'
 import styles from '../styles/Home.module.css'
 import prisma from '../lib/prisma'
-import { useSession } from 'next-auth/client'
 import ResponseTable, { QuestionProps } from '../components/ResponseTable'
 import { Accordion } from 'semantic-ui-react'
 import FooterNav from '../components/FooterNav'
@@ -43,7 +42,6 @@ type Props = {
 }
 
 const Responses: NextPage<Props> = (props) => {
-  const [session, loading] = useSession()
   const [activeIndex, setActiveIndex] = useState(null)
 
   return (

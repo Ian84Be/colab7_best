@@ -1,19 +1,29 @@
 export function rank(answers) {
   const { questionId } = answers[0]
-  // console.log({ questionId })
+  // console.log({ answers })
+  // console.log(answers[0].lat)
 
   let count = {}
-  answers.forEach(({ answer }) => {
-    if (count[answer]) count[answer] += 1
-    else count[answer] = 1
+  answers.forEach((a) => {
+    const { answer, lat, lng } = a
+    if (count[answer]) count[answer].count += 1
+    else {
+      count[answer] = {
+        count: 1,
+        lat,
+        lng,
+      }
+    }
   })
 
   let result = []
   for (const name in count) {
     result.push({
       name,
-      count: count[name],
+      count: count[name].count,
       questionId,
+      lat: count[name].lat,
+      lng: count[name].lng,
     })
   }
 

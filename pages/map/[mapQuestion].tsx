@@ -1,4 +1,6 @@
 import type { GetServerSideProps } from 'next'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useState, useRef, useEffect } from 'react'
 import prisma from '../../lib/prisma'
 import styles from '../../styles/Answer.module.css'
@@ -6,6 +8,7 @@ import { rank } from '../../lib/helpers'
 import RankedResultCard from '../../components/RankedResultCard'
 import { Loader } from '@googlemaps/js-api-loader'
 import { addMarker } from '../../lib/helpers'
+import Chevron from '../../components/Icons/Chevron'
 
 export const getServerSideProps: GetServerSideProps = async ({
   query,
@@ -28,12 +31,15 @@ export const getServerSideProps: GetServerSideProps = async ({
     },
   })
 
-  return { props: { answers, lat, lng } }
+  return { props: { params, answers, lat, lng } }
 }
 
-const View: React.FC<Props> = ({ answers, lat, lng }) => {
+const View: React.FC<Props> = ({ params, answers, lat, lng }) => {
+  const router = useRouter()
   const rankedResult = rank(answers)
-  console.log({ rankedResult })
+  // console.log({ rankedResult })
+  const [activePin, setActivePin] = useState(0)
+  console.log({ activePin })
 
   lat = parseFloat(lat)
   lng = parseFloat(lng)
@@ -56,6 +62,8 @@ const View: React.FC<Props> = ({ answers, lat, lng }) => {
           mapId: process.env.NEXT_PUBLIC_GOOGLE_MAPS_ID,
           mapTypeControl: false,
           fullscreenControl: false,
+          streetViewControl: false,
+          zoomControl: false,
         })
 
         // console.log({ map, answers })
@@ -64,14 +72,45 @@ const View: React.FC<Props> = ({ answers, lat, lng }) => {
       })
   }, [answers, rankedResult, googleMap, map, lat, lng])
 
+  const handleChange = (e) => {
+    let newPin = activePin
+    if (e === 'back') newPin -= 1
+    if (e === 'next') newPin += 1
+    const { lat, lng } = rankedResult[newPin]
+    console.log('handlChangenN', rankedResult[newPin])
+    setActivePin(newPin)
+    router.push(`/map/${params.mapQuestion}?lat=${lat}&lng=${lng}`)
+    map.panTo(new google.maps.LatLng(lat, lng))
+  }
   return (
     <div className={styles.answer_content}>
+      <Link href="/Responses">
+        <a className={styles.map_back_nav}>
+          <Chevron rotate={90} />
+        </a>
+      </Link>
       <div ref={googleMap} className={styles.googleMap} />
 
       <section className={styles.responseContainer}>
-        {rankedResult.map((a) => (
-          <RankedResultCard key={a.name} answer={a} />
-        ))}
+        {activePin > 0 ? (
+          <Chevron
+            name="back"
+            rotate={90}
+            onClick={() => handleChange('back')}
+          />
+        ) : (
+          <span style={{ width: '24px' }}></span>
+        )}
+        {rankedResult.map((a, i) =>
+          i === activePin ? <RankedResultCard key={a.name} answer={a} /> : <></>
+        )}
+        {activePin < rankedResult.length - 1 && (
+          <Chevron
+            name="next"
+            rotate={270}
+            onClick={() => handleChange('next')}
+          />
+        )}
       </section>
     </div>
   )

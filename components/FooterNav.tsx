@@ -6,9 +6,10 @@ import homeIcon from '../public/images/home_button.svg'
 
 const FooterNav = () => {
   const router = useRouter()
-  console.log(router.pathname)
   const questionPage = router.pathname.match(/question/i)
+  const responsePage = router.pathname.match(/response/)
   const rootPage = router.pathname === '/' ? true : false
+
   return (
     <nav className={styles.footer}>
       {rootPage ? (
@@ -22,7 +23,7 @@ const FooterNav = () => {
           </a>
         </Link>
       )}
-      {questionPage ? (
+      {questionPage || responsePage ? (
         <Link href="/Responses">
           <a className={styles.footer_button}>Responses</a>
         </Link>

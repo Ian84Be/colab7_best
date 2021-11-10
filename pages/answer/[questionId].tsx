@@ -12,7 +12,7 @@ import {
   dayNames,
   displayTime,
 } from '../../lib/helpers'
-import ChevronDown from '../../components/Icons/Chevron'
+import Chevron from '../../components/Icons/Chevron'
 import FooterNav from '../../components/FooterNav'
 
 export const getServerSideProps: GetServerSideProps = async ({
@@ -100,10 +100,21 @@ const View: React.FC<Props> = ({ answers, best, yelpData }) => {
       <header className={styles.answer_header}>
         <Link href="/Responses">
           <a>
-            <ChevronDown rotate={90} />
+            <Chevron rotate={90} />
           </a>
         </Link>
-        <div className={styles.answer_title}>{best}</div>
+        <div
+          className={styles.answer_title}
+          onClick={() =>
+            router.push(
+              `/response/${questionId}?name=${encodeURIComponent(
+                'Ian Belknap'
+              )}`
+            )
+          }
+        >
+          {best}
+        </div>
       </header>
       <Image
         src={photos[0]}
@@ -135,23 +146,30 @@ const View: React.FC<Props> = ({ answers, best, yelpData }) => {
         >
           <div className={styles.hours_row}>
             <p className={styles.hours_day}>{dayNames[dayNum]}</p>
-            {displayTime(hours[0].open[dayNum].start)} -{' '}
-            {displayTime(hours[0].open[dayNum].end)}
+            {hours[0].open[dayNum].start === '0000' &&
+            hours[0].open[dayNum].end === '0000'
+              ? 'Open 24 Hours'
+              : `${displayTime(hours[0].open[dayNum].start)} -
+							${displayTime(hours[0].open[dayNum].end)}`}
           </div>
-          <ChevronDown rotate={activeIndex ? 180 : 0} />
+          <Chevron rotate={activeIndex ? 180 : 0} />
         </Accordion.Title>
         <Accordion.Content
           active={activeIndex}
           style={{ padding: '0', margin: '16px 0 16px' }}
         >
-          {hours[0].open.map((day) => (
-            <div className={styles.hours_row_expand} key={day.day}>
-              <p className={styles.hours_day}>{dayNames[day.day]}</p>
-              <p className={styles.hours_time}>
-                {displayTime(day.start)} - {displayTime(day.end)}
-              </p>
-            </div>
-          ))}
+          {hours[0].open.map((day) => {
+            return (
+              <div className={styles.hours_row_expand} key={day.day}>
+                <p className={styles.hours_day}>{dayNames[day.day]}</p>
+                <p className={styles.hours_time}>
+                  {day.start === '0000' && day.end === '0000'
+                    ? 'Open 24 Hours'
+                    : `${displayTime(day.start)} - ${displayTime(day.end)}`}
+                </p>
+              </div>
+            )
+          })}
         </Accordion.Content>
       </Accordion>
 

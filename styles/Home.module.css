@@ -1,12 +1,8 @@
 .container {
   align-items: center;
   background: var(--primary_bg);
-  /* border: 3px solid black; */
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
-  height: 100vh;
-  /* padding: 1rem; */
 }
 
 .question_content {
@@ -14,10 +10,7 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  /* padding: 20px 20px 16px 20px; */
   width: 375px;
-  height: 667px;
-  /* border: 1px solid var(--grey); */
 }
 
 .mainBG {
@@ -29,8 +22,6 @@
   padding: 20px 20px 16px 20px;
   width: 375px;
   height: 100vh;
-  /* height: 667px; */
-  /* border: 1px solid red; */
 }
 
 .bestLogo {

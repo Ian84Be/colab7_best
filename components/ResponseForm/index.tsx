@@ -5,6 +5,7 @@ import styles from '../../styles/Form.module.css'
 import SignInGoogleButton from '../SignInGoogleButton'
 import Step1 from './Step1'
 import { googleLatLng } from '../../lib/googleAutocomplete'
+import FooterNav from '../FooterNav'
 
 export type FormData = {
   answer: string
@@ -80,7 +81,7 @@ const AnswerForm: React.FC<Props> = ({ question, name }) => {
             <p className={styles.label} style={{ marginBottom: '32px' }}>
               Your recommendation has been sent
             </p>
-            <div
+            {/* <div
               className={styles.label}
               style={{
                 display: 'flex',
@@ -95,7 +96,7 @@ const AnswerForm: React.FC<Props> = ({ question, name }) => {
                 <strong className={styles.logoFont}>BEST!</strong>
               </div>
             </div>
-            <SignInGoogleButton />
+            <SignInGoogleButton /> */}
           </>
         )}
       </Form>
@@ -106,6 +107,7 @@ const AnswerForm: React.FC<Props> = ({ question, name }) => {
           </button>
         )}
       </div>
+      <FooterNav />
     </div>
   )
 }

@@ -4,12 +4,13 @@ import styles from '../styles/Response.module.css'
 
 const RankedResultCard = ({ answer }) => {
   const router = useRouter()
+  const mapPage = router.pathname.match(/map/i)
   const { questionId, rank, name, count } = answer
 
   return (
     <div
       key={name}
-      className={styles.row}
+      className={mapPage ? styles.mapRow : styles.row}
       onClick={() =>
         router.push(`/answer/${questionId}?best=${encodeURIComponent(name)}`)
       }
@@ -18,7 +19,7 @@ const RankedResultCard = ({ answer }) => {
         {rank}
       </div>
       <section className={styles.section}>
-        <p className={styles.name}>{name}</p>
+        <p className={styles.name}>{name.slice(0, 30)}</p>
         <strong className={styles.votes}>{count} votes</strong>
       </section>
     </div>

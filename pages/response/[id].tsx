@@ -1,6 +1,6 @@
 import type { GetServerSideProps } from 'next'
 import prisma from '../../lib/prisma'
-import AnswerForm from '../../components/ResponseForm'
+import ResponseForm from '../../components/ResponseForm'
 import { QuestionProps } from '../../components/ResponseTable'
 
 export const getServerSideProps: GetServerSideProps = async ({
@@ -30,7 +30,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 }
 
 const View: React.FC<QuestionProps> = ({ question, name }) => {
-  return <AnswerForm question={question} name={name} />
+  return <ResponseForm question={question} name={name} />
 }
 
 export default View

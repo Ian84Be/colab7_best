@@ -30,11 +30,8 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  /* padding: 20px 20px 16px 20px; */
   width: 375px;
-  /* height: 667px; */
   height: 100vh;
-  border: 1px solid var(--grey);
 }
 .hours_row {
   display: flex;
@@ -69,14 +66,32 @@
   /* margin-left: 16px; */
 }
 .responseContainer {
+  align-items: center;
   background: #f8f8f8;
   border-radius: 3px;
   /* border: 1px solid red; */
   display: flex;
+  justify-content: space-between;
   padding: 16px;
   height: 76px;
-  /* width: 327px; */
+  width: 327px;
   overflow: hidden;
   position: absolute;
   bottom: 20px;
+}
+.map_back_nav {
+  display: flex;
+  align-items: center;
+  align-self: flex-start;
+  justify-content: center;
+  border-radius: 50%;
+  position: absolute;
+  top: 45px;
+  z-index: 1;
+  width: 36px;
+  height: 36px;
+  margin-left: 10px;
+
+  background: #f8f8f8;
+  border: 1px solid #c8d7d7;
 }

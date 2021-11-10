@@ -18,6 +18,7 @@ export type FormData = {
 
 const QuestionForm: React.FC<Props> = (props) => {
   const localApi = 'http://localhost:3000/api/'
+  const [questionId, setQuestionId] = useState(0)
   const [formStep, setFormStep] = useState(1)
   const [myContacts, setMyContacts] = useState([])
 
@@ -59,20 +60,22 @@ const QuestionForm: React.FC<Props> = (props) => {
     formData.lat = lat
     formData.lng = lng
 
-    const response = await fetch(localApi + 'createQuestion', {
+    await fetch(localApi + 'createQuestion', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(formData),
     })
-      .then((res) => {
+      .then(async (res) => {
+        let response = await res.json()
+        console.log('submitData() response', response)
+        let newId = response.data.id
         setFormStep(4)
+        setQuestionId(newId)
         return res.json()
       })
       .catch((err) => console.log({ err }))
-
-    console.log('submitData() response', response)
   }
 
   const {
@@ -80,12 +83,10 @@ const QuestionForm: React.FC<Props> = (props) => {
     handleSearchChange,
     handleChange,
     handleDropdown,
-    handleSubmit,
     searchTerm,
   } = useForm(submitData, formState)
 
   const handleStepChange = (e) => {
-    // console.log(e.target.innerText)
     e.preventDefault()
     if (e.target.innerText === 'Back') {
       if (formStep > 1) setFormStep(formStep - 1)
@@ -125,7 +126,7 @@ const QuestionForm: React.FC<Props> = (props) => {
         {formStep === 3 && (
           <Step3 formData={formData} handleChange={handleChange} />
         )}
-        {formStep === 4 && <Step4 />}
+        {formStep === 4 && <Step4 questionId={questionId} />}
       </Form>
       <div className={styles.formNav}>
         {formStep > 1 && formStep !== 4 && (

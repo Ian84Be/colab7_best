@@ -4,7 +4,7 @@ import formStyles from '../styles/Form.module.css'
 import styles from '../styles/Response.module.css'
 import RankedResultCard from './RankedResultCard'
 import { rank } from '../lib/helpers'
-import ChevronDown from './Icons/Chevron'
+import Chevron from './Icons/Chevron'
 
 export type QuestionProps = {
   id: number
@@ -53,7 +53,7 @@ const ResponseTable: React.FC<{ question: QuestionProps }> = ({
             </strong>{' '}
             in <strong className={formStyles.location}>{location}</strong>
           </div>
-          <ChevronDown rotate={activeIndex === id ? 180 : 0} />
+          <Chevron rotate={activeIndex === id ? 180 : 0} />
         </Accordion.Title>
         <Accordion.Content active={activeIndex === id} style={{ padding: '0' }}>
           <div className={styles.responseContainer}>

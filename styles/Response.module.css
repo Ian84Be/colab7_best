@@ -5,8 +5,16 @@
 .row {
   display: flex;
   padding: 20px 20px 20px 16px;
-  /* border-bottom: 1px solid var(--grey); */
+  border-bottom: 1px solid var(--grey);
   align-items: center;
+  width: 100%;
+}
+.mapRow {
+  display: grid;
+  grid-template-columns: 25% 75%;
+  padding: 20px 20px 20px 16px;
+  align-items: center;
+  width: 100%;
 }
 .row:hover {
   cursor: pointer;
@@ -37,14 +45,16 @@
 }
 
 .section {
-  /* border: 1px solid red; */
   margin-left: 22px;
+  max-width: 75%;
 }
 
 .name {
   font-size: 16px;
   line-height: 23px;
   margin: 0;
+  max-height: 44px;
+  overflow: hidden;
 }
 
 .votes {

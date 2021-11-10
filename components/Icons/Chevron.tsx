@@ -1,4 +1,4 @@
-export default function ChevronDown({ rotate }) {
+export default function ChevronDown({ rotate, onClick, name }) {
   return (
     <svg
       width="24"
@@ -7,6 +7,7 @@ export default function ChevronDown({ rotate }) {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       style={{ transform: `rotateZ(${rotate}deg)` }}
+      onClick={onClick}
     >
       <path
         d="M6 9L12 15L18 9"
